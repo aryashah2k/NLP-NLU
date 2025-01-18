@@ -31,6 +31,17 @@ Word embeddings implementation including:
 - Skip-gram
 - Skip-gram with Negative Sampling
 - GloVe
+- Glove (Gensim) Evaluation
+
+| App Demo | App Tests |
+|----------|-----------|
+| <video src="https://github.com/aryashah2k/NLP-NLU/blob/main/assets/A1_Demo.mp4" controls="controls" style="max-width: 730px;"></video> | <video src="https://github.com/aryashah2k/NLP-NLU/blob/main/assets/A1_Tests.mp4" controls="controls" style="max-width: 730px;"></video> |
+
+**Screenshots**
+
+|Home|A1 Page|
+|----|-------|
+|![Home](path/to/demo-image.png)|![A1](path/to/demo-image.png)|
 
 ### A2: Language Modelling
 Coming soon!
@@ -39,10 +50,6 @@ Coming soon!
 
 1. Clone the repository
 2. Create a virtual environment:
-   ```bash
-   python -m venv venv
-   source venv/bin/activate  # On Windows: venv\Scripts\activate
-   ```
 3. Install dependencies:
    ```bash
    pip install -r requirements.txt
@@ -51,6 +58,14 @@ Coming soon!
    ```bash
    python run.py
    ```
+5. Run tests:
+
+   ```bash
+   pytest -v
+   ```
+
+You can also run the tests individually by specifying the target file to test
+
 
 ## License
-© 2024 Arya Shah. All rights reserved.
+© 2024 Arya Shah. All rights reserved. | MIT
