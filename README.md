@@ -35,7 +35,7 @@ Word embeddings implementation including:
 
 | App Demo | App Tests |
 |----------|-----------|
-| <video src="https://github.com/aryashah2k/NLP-NLU/blob/main/assets/A1_Demo.mp4" controls="controls" style="max-width: 730px;"></video> | <video src="https://github.com/aryashah2k/NLP-NLU/blob/main/assets/A1_Tests.mp4" controls="controls" style="max-width: 730px;"></video> |
+| <video src="https://github.com/aryashah2k/NLP-NLU/blob/main/assets/A1_Demo.mp4" controls="controls" ></video> | <video src="https://github.com/aryashah2k/NLP-NLU/blob/main/assets/A1_Tests.mp4" controls="controls"></video> |
 
 **Screenshots**
 
