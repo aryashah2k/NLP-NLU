@@ -43,7 +43,6 @@ flask_session/
 
 # Jupyter Notebook
 .ipynb_checkpoints
-*.ipynb
 
 # Model files and large data
 # *.pt
