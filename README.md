@@ -41,7 +41,7 @@ Word embeddings implementation including:
 
 |Home|A1 Page|
 |----|-------|
-|![Home](path/to/demo-image.png)|![A1](path/to/demo-image.png)|
+|![Home](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/home.PNG)|![A1](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a1.PNG)|
 
 ### A2: Language Modelling
 Coming soon!
