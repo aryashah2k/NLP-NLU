@@ -1,0 +1,112 @@
+{% extends "index.html" %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Search Similar Context🔍</h3>
+                </div>
+                <div class="card-body">
+                    <form id="wordEmbeddingForm" class="needs-validation" novalidate>
+                        <div class="form-group">
+                            <label for="inputWord">Enter a word:</label>
+                            <input type="text" class="form-control" id="inputWord" name="word" required>
+                            <div class="invalid-feedback">Please enter a word.</div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="modelSelect">Select Model:</label>
+                            <select class="form-control" id="modelSelect" name="model" required>
+                                <option value="skipgram">Skipgram</option>
+                                <option value="skipgram_neg">Skipgram with Negative Sampling</option>
+                                <option value="glove">GloVe</option>
+                            </select>
+                            <div class="invalid-feedback">Please select a model.</div>
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-3">Find Similar Words</button>
+                    </form>
+                    
+                    <div id="results" class="mt-4" style="display: none;">
+                        <h4>Top 10 Similar Words:</h4>
+                        <div class="table-responsive">
+                            <table class="table table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>Word</th>
+                                        <th>Similarity Score</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="resultsBody">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    
+                    <div id="error" class="alert alert-danger mt-3" style="display: none;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function() {
+    $('#wordEmbeddingForm').on('submit', function(e) {
+        e.preventDefault();
+        
+        const word = $('#inputWord').val().trim();
+        const model = $('#modelSelect').val();
+        
+        if (!word || !model) {
+            $('#error').text('Please fill in all fields').show();
+            return;
+        }
+        
+        // Show loading state
+        $('button[type="submit"]').prop('disabled', true).html(
+            '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Loading...'
+        );
+        
+        // Clear previous results/errors
+        $('#results').hide();
+        $('#error').hide();
+        
+        $.ajax({
+            url: "{{ url_for('get_similar_words') }}",
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({
+                word: word,
+                model: model
+            }),
+            success: function(response) {
+                $('#resultsBody').empty();
+                
+                response.similar_words.forEach(function(item) {
+                    $('#resultsBody').append(`
+                        <tr>
+                            <td>${item.word}</td>
+                            <td>${item.similarity.toFixed(4)}</td>
+                        </tr>
+                    `);
+                });
+                
+                $('#results').show();
+            },
+            error: function(xhr) {
+                let errorMessage = 'An error occurred';
+                if (xhr.responseJSON && xhr.responseJSON.error) {
+                    errorMessage = xhr.responseJSON.error;
+                }
+                $('#error').text(errorMessage).show();
+            },
+            complete: function() {
+                // Reset button state
+                $('button[type="submit"]').prop('disabled', false).text('Find Similar Words');
+            }
+        });
+    });
+});
+</script>
+{% endblock %}
