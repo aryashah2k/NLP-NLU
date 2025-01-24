@@ -31,9 +31,28 @@ Word embeddings implementation including:
 - Skip-gram
 - Skip-gram with Negative Sampling
 - GloVe
+- Glove (Gensim) Evaluation
+
+| App Demo | App Tests |
+|----------|-----------|
+| <img src="https://github.com/aryashah2k/NLP-NLU/blob/main/assets/A1_Demo.gif"> | <img src="https://github.com/aryashah2k/NLP-NLU/blob/main/assets/A1_Tests.gif"> |
+
+**Screenshots**
+|Home|A1 Page|
+|----|-------|
+|![Home](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/home.PNG)|![A1](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a1.PNG)|
 
 ### A2: Language Modelling
-Coming soon!
+Train a model that can generate coherent and contextually relevant text based on a given input using LSTM
+
+| App Demo | 
+|----------|
+| <img src="https://github.com/aryashah2k/NLP-NLU/blob/main/assets/A2_Demo.gif"> |
+
+**Screenshots**
+|Home|A2 Page|
+|----|-------|
+|![Home](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a2home.PNG)|![A1](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a2.PNG)|
 
 ## Setup and Installation
 
@@ -51,6 +70,11 @@ Coming soon!
    ```bash
    python run.py
    ```
+5. Run tests:
+   ```bash
+   pytest -v
+   ```
+You can also run the tests individually by specifying the target file to test
 
 ## License
-© 2024 Arya Shah. All rights reserved.
+© 2024 Arya Shah. All rights reserved. | MIT
