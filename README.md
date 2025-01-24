@@ -50,9 +50,9 @@ Train a model that can generate coherent and contextually relevant text based on
 | <img src="https://github.com/aryashah2k/NLP-NLU/blob/main/assets/A2_Demo.gif"> |
 
 **Screenshots**
-|Home|A2 Page|
-|----|-------|
-|![Home](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a2home.PNG)|![A1](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a2.PNG)|
+|A2 Page|
+|-------|
+|![A2](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a2.PNG)|
 
 ## Setup and Installation
 
