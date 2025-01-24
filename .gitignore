@@ -45,13 +45,13 @@ flask_session/
 .ipynb_checkpoints
 
 # Model files and large data
-# *.pt
-# *.pth
-# *.h5
-# *.pkl
-# *.model
-# models/*.pt
-# models/*.pth
+*.pt
+*.pth
+*.h5
+*.pkl
+*.model
+models/*.pt
+models/*.pth
 
 # Logs and databases
 *.log
