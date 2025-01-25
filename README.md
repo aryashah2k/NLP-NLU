@@ -19,6 +19,7 @@ nlp-assignments/
 │       └── routes.py         # Flask routes
 ├── data/                      # Dataset storage
 ├── notebooks/                 # Jupyter notebooks
+├── reports/                 # Assignment Report PDFs
 ├── tests/                     # Test files
 ├── requirements.txt           # Python dependencies
 └── run.py                    # Application entry point
