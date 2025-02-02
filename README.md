@@ -2,6 +2,14 @@
 
 This repository contains my assignments for the AT82.05 Artificial Intelligence: Natural Language Understanding (NLU) course at AIT.
 
+|Table of Contents|
+|-----------------|
+|<a href="https://github.com/aryashah2k/NLP-NLU/tree/main?tab=readme-ov-file#a1-thats-what-i-like">A1: That's What I LIKE!</a>|
+|<a href="https://github.com/aryashah2k/NLP-NLU/tree/main?tab=readme-ov-file#a2-language-modelling">A2: Language modelling</a>|
+|<a href="https://github.com/aryashah2k/NLP-NLU/tree/main?tab=readme-ov-file#a3-make-your-own-machine-translation-language">A3: Make Your Own Machine Translation Language</a>|
+|<a href="Coming Soon!">A4....</a>|
+|<a href="https://github.com/aryashah2k/NLP-NLU/tree/main?tab=readme-ov-file#setup-and-installation">Setup & Installation</a>|
+
 ## Project Structure
 
 ```
@@ -71,7 +79,7 @@ Train a model that can generate coherent and contextually relevant text based on
 
 |Training History|
 |----------------|
-|![1](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a2_assets/training_history.PNG)|
+|![1](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a2_assets/training_history.png)|
 
 
 ```text
