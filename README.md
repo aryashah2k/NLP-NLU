@@ -7,7 +7,7 @@ This repository contains my assignments for the AT82.05 Artificial Intelligence:
 |<a href="https://github.com/aryashah2k/NLP-NLU/tree/main?tab=readme-ov-file#a1-thats-what-i-like">A1: That's What I LIKE!</a>|
 |<a href="https://github.com/aryashah2k/NLP-NLU/tree/main?tab=readme-ov-file#a2-language-modelling">A2: Language modelling</a>|
 |<a href="https://github.com/aryashah2k/NLP-NLU/tree/main?tab=readme-ov-file#a3-make-your-own-machine-translation-language">A3: Make Your Own Machine Translation Language</a>|
-|<a href="Coming Soon!">A4....</a>|
+|<a href="https://github.com/aryashah2k/NLP-NLU/blob/main/app/static/coming_soon.gif">A4....Coming Soon!</a>|
 |<a href="https://github.com/aryashah2k/NLP-NLU/tree/main?tab=readme-ov-file#setup-and-installation">Setup & Installation</a>|
 
 ## Project Structure
@@ -51,9 +51,13 @@ Word embeddings implementation including:
 |<img src="https://github.com/aryashah2k/NLP-NLU/blob/main/assets/A1_Tests.gif"> |
 
 **Screenshots**
-|Home|A1 Page|
-|----|-------|
-|![Home](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/home.PNG)|![A1](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a1.PNG)|
+|Home|
+|----|
+|![Home](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/home.PNG)|
+
+|A1 Page|
+|----|
+|![A1](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a1.PNG)|
 
 #### Summary of Results
 
