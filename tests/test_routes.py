@@ -99,11 +99,47 @@ def test_generate_text_invalid_max_length(client):
     assert 'error' in data
 
 def test_a3_coming_soon_page(client):
-    """Test that the A3 coming soon page loads successfully."""
+    """Test that the A4 coming soon page loads successfully."""
     response = client.get('/coming_soon')
     assert response.status_code == 200
-    assert b'A3: Make Your Own Machine Translation Language' in response.data
+    assert b'A4: Do You AGREE?' in response.data
     assert b'Coming Soon!' in response.data
+
+def test_a3_page(client):
+    """Test that the A3 machine translation page loads successfully."""
+    response = client.get('/a3')
+    assert response.status_code == 200
+    assert b'Machine Translation' in response.data
+
+def test_translate_missing_data(client):
+    """Test error handling when no data is provided for translation."""
+    response = client.post('/translate',
+                         data=json.dumps({}),
+                         content_type='application/json')
+    assert response.status_code == 200  # The route returns 200 even for errors
+    data = json.loads(response.data)
+    assert 'error' in data
+    assert data['error'] == 'Invalid request data'
+
+def test_translate_missing_text(client):
+    """Test error handling when text is missing."""
+    response = client.post('/translate',
+                         data=json.dumps({'model': 'transformer'}),
+                         content_type='application/json')
+    assert response.status_code == 200
+    data = json.loads(response.data)
+    assert 'error' in data
+    assert data['error'] == 'Invalid request data'
+
+def test_translate_missing_model(client):
+    """Test error handling when model is missing."""
+    response = client.post('/translate',
+                         data=json.dumps({'text': 'Hello world'}),
+                         content_type='application/json')
+    assert response.status_code == 200
+    data = json.loads(response.data)
+    assert 'error' in data
+    assert data['error'] == 'Invalid request data'
 
 def test_navigation_links(client):
     """Test that all navigation links are present in the pages."""

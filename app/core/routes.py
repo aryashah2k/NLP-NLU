@@ -194,6 +194,11 @@ def register_routes(app):
     def a2():
         return render_template('a2.html')
     
+    @app.route('/a3')
+    def a3():
+        """Route for Assignment 3: Make Your Own Machine Translation Model."""
+        return render_template('a3.html')
+
     @app.route('/generate_text', methods=['POST'])
     def generate():
         try:
@@ -254,6 +259,21 @@ def register_routes(app):
             logger.error(f"Error generating text: {str(e)}")
             logger.error(f"Traceback: {traceback.format_exc()}")
             return jsonify({'error': str(e)}), 500
+
+    @app.route('/translate', methods=['POST'])
+    def translate():
+        """Handle translation requests."""
+        try:
+            data = request.get_json()
+            if not data or 'text' not in data or 'model' not in data:
+                return jsonify({'error': 'Invalid request data'})
+            
+            from app.assignments.a3_make_your_own_mt_model.translation_handler import handle_translation
+            return handle_translation(data['text'], data['model'])
+            
+        except Exception as e:
+            print(f"Translation route error: {str(e)}")
+            return jsonify({'error': 'Translation request failed'})
 
     # Load models when registering routes
     load_models()
