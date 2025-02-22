@@ -5,11 +5,14 @@ import traceback
 from app.assignments.a1_word_embeddings.utils import load_model, find_similar_words
 import torch
 from app.assignments.a2_language_modelling.utils import LSTMLanguageModel, Vocabulary, generate_text
+from app.assignments.a4_do_you_agree.inference import NLIPredictor
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
 # Global dictionary to store loaded models
 models = {
     'a1': {},
-    'a2': None
+    'a2': None,
+    'a4': None
 }
 
 # Setup logging
@@ -125,6 +128,24 @@ def load_models():
             logger.error(f"A2 model file not found at {model_path}")
     except Exception as e:
         logger.error(f"Error loading A2 model: {str(e)}")
+        logger.error(f"Traceback: {traceback.format_exc()}")
+    
+    # Load A4 NLI model
+    try:
+        a4_model_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), 
+                                'assignments', 'a4_do_you_agree', 'sbert_model')
+        if os.path.exists(a4_model_dir):
+            logger.info(f"Loading A4 NLI model from {a4_model_dir}")
+            try:
+                models['a4'] = NLIPredictor(model_dir=a4_model_dir)
+                logger.info("Successfully loaded A4 NLI model")
+            except Exception as e:
+                logger.error(f"Error initializing NLI model: {e}")
+                logger.error(f"Traceback: {traceback.format_exc()}")
+        else:
+            logger.error(f"A4 model directory not found: {a4_model_dir}")
+    except Exception as e:
+        logger.error(f"Error loading A4 model: {e}")
         logger.error(f"Traceback: {traceback.format_exc()}")
     
 def register_routes(app):
@@ -274,6 +295,41 @@ def register_routes(app):
         except Exception as e:
             print(f"Translation route error: {str(e)}")
             return jsonify({'error': 'Translation request failed'})
+
+    @app.route('/a4')
+    def a4():
+        """Route for Assignment 4: Natural Language Inference."""
+        return render_template('a4.html')
+
+    @app.route('/predict_nli', methods=['POST'])
+    def predict_nli():
+        """Handle NLI prediction requests."""
+        try:
+            data = request.get_json()
+            if not data or 'premise' not in data or 'hypothesis' not in data:
+                return jsonify({'error': 'Both premise and hypothesis are required'}), 400
+
+            premise = data['premise'].strip()
+            hypothesis = data['hypothesis'].strip()
+
+            if not premise or not hypothesis:
+                return jsonify({'error': 'Both premise and hypothesis must not be empty'}), 400
+
+            if models.get('a4') is None:
+                return jsonify({'error': 'NLI model not loaded'}), 500
+
+            predictor = models['a4']
+            result = predictor.predict(premise, hypothesis)
+
+            return jsonify({
+                'predicted_label': result['label'],
+                'probabilities': result['probabilities']
+            })
+
+        except Exception as e:
+            logger.error(f"Error in predict_nli: {str(e)}")
+            logger.error(f"Traceback: {traceback.format_exc()}")
+            return jsonify({'error': str(e)}), 500
 
     # Load models when registering routes
     load_models()

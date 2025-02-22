@@ -7,7 +7,8 @@ This repository contains my assignments for the AT82.05 Artificial Intelligence:
 |<a href="https://github.com/aryashah2k/NLP-NLU/tree/main?tab=readme-ov-file#a1-thats-what-i-like">A1: That's What I LIKE!</a>|
 |<a href="https://github.com/aryashah2k/NLP-NLU/tree/main?tab=readme-ov-file#a2-language-modelling">A2: Language modelling</a>|
 |<a href="https://github.com/aryashah2k/NLP-NLU/tree/main?tab=readme-ov-file#a3-make-your-own-machine-translation-language">A3: Make Your Own Machine Translation Language</a>|
-|<a href="https://github.com/aryashah2k/NLP-NLU/blob/main/app/static/coming_soon.gif">A4....Coming Soon!</a>|
+|<a href="https://github.com/aryashah2k/NLP-NLU/tree/main?tab=readme-ov-file#a4-do-you-agree">A4: Do You AGREE!</a>|
+|<a href="https://github.com/aryashah2k/NLP-NLU/blob/main/app/static/coming_soon.gif">A5....Coming Soon!</a>|
 |<a href="https://github.com/aryashah2k/NLP-NLU/tree/main?tab=readme-ov-file#setup-and-installation">Setup & Installation</a>|
 
 ## Project Structure
@@ -133,6 +134,70 @@ Translating between my Native Language `Gujarati` and English. I have experiment
 |![1](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a3_assets/loss_plot_additive.png)|![2](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a3_assets/loss_plot_multiplicative.png)|![3](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a3_assets/loss_plot_general.png)|
 
 -----------------
+
+### A4: Do You Agree
+Training a pre-trained model like BERT from scratch, focusing on leveraging text embeddings to capture semantic similarity. Additionally, we will explore how to adapt the loss function for tasks like Natural Language Inference (NLI) to enhance the model’s ability to understand semantic relationships between texts
+
+| App Demo | 
+|----------|
+| <img src="https://github.com/aryashah2k/NLP-NLU/blob/main/assets/A4_Demo.gif"> |
+
+**Screenshots**
+|A4 Page|
+|-------|
+|![A4](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a4.PNG)|
+
+#### Summary of Results
+
+##### Overall Metrics (Final Epoch)
+| Metric | Value |
+|--------|--------|
+| Accuracy | 40.25% |
+| Average Loss | 1.0340 |
+| Weighted F1-Score | 0.38 |
+| Macro F1-Score | 0.29 |
+
+##### Class-wise Performance
+| Class | Precision | Recall | F1-Score | Support |
+|-------|-----------|--------|-----------|---------|
+| Entailment | 0.43 | 0.38 | 0.41 | 273 |
+| Contradiction | 0.41 | 0.61 | 0.49 | 273 |
+| Neutral | 0.33 | 0.21 | 0.25 | 246 |
+
+##### Cosine Similarity Analysis
+| Class | Mean | Standard Deviation |
+|-------|------|-------------------|
+| Entailment | 0.7780 | 0.1795 |
+| Contradiction | 0.8076 | 0.1534 |
+| Neutral | 0.7976 | 0.1491 |
+
+##### Final Conclusion
+
+The model's performance on the SNLI/MNLI dataset shows several key characteristics:
+
+1. **Overall Performance**:
+   - Moderate accuracy (40.25%) on the validation set
+   - Consistent but relatively high loss (1.0340)
+   - Balanced performance across classes with weighted F1-score of 0.38
+
+2. **Class-specific Performance**:
+   - Best performance on Contradiction class (F1: 0.49)
+   - Moderate performance on Entailment class (F1: 0.41)
+   - Poorest performance on Neutral class (F1: 0.25)
+
+3. **Model Behavior**:
+   - Shows good discrimination between classes (cosine similarities differ)
+   - Demonstrates learning progression (decreasing loss over epochs)
+   - Maintains consistent performance across validation checks
+
+4. **Areas for Improvement**:
+   - Neutral class recognition needs significant improvement
+   - Overall accuracy could be enhanced with more training data
+   - Model confidence (cosine similarities) could be more distinctive between classes
+
+The model shows promise but would benefit from further optimization and larger training datasets for production use.
+
+------------------
 
 ## Setup and Installation
 

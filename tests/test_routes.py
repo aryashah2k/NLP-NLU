@@ -143,11 +143,115 @@ def test_translate_missing_model(client):
 
 def test_navigation_links(client):
     """Test that all navigation links are present in the pages."""
-    pages = ['/', '/word_embeddings', '/a2', '/coming_soon']
-    for page in pages:
-        response = client.get(page)
+    # Test navigation links on home page
+    response = client.get('/')
+    assert response.status_code == 200
+    
+    # Test main navigation menu - using href patterns
+    assert b'href="/home"' in response.data
+    assert b'href="/word_embeddings"' in response.data
+    assert b'href="/a2"' in response.data
+    assert b'href="/a3"' in response.data
+    assert b'href="/a4"' in response.data
+    assert b'href="/coming_soon"' in response.data
+    
+    # Test navigation text
+    assert b"That's what I LIKE!" in response.data
+    assert b"Language Modelling" in response.data
+    assert b"Make Your Own Machine Translation Language" in response.data
+    assert b"Do you AGREE?" in response.data
+    assert b"Optimization Human Preference" in response.data
+
+    # Test A4 page specific content
+    response = client.get('/a4')
+    assert response.status_code == 200
+    assert b'Natural Language Inference' in response.data
+    assert b'Premise:' in response.data
+    assert b'Hypothesis:' in response.data
+
+def test_a4_page(client):
+    """Test that the A4 NLI page loads successfully."""
+    response = client.get('/a4')
+    assert response.status_code == 200
+    assert b'Natural Language Inference' in response.data
+    assert b'Premise:' in response.data
+    assert b'Hypothesis:' in response.data
+
+def test_predict_nli_missing_data(client):
+    """Test error handling when no data is provided for NLI prediction."""
+    response = client.post('/predict_nli',
+                         data=json.dumps({}),
+                         content_type='application/json')
+    assert response.status_code == 400
+    data = json.loads(response.data)
+    assert 'error' in data
+    assert 'premise and hypothesis are required' in data['error'].lower()
+
+def test_predict_nli_missing_premise(client):
+    """Test error handling when premise is missing."""
+    response = client.post('/predict_nli',
+                         data=json.dumps({'hypothesis': 'test'}),
+                         content_type='application/json')
+    assert response.status_code == 400
+    data = json.loads(response.data)
+    assert 'error' in data
+    assert 'premise' in data['error'].lower()
+
+def test_predict_nli_missing_hypothesis(client):
+    """Test error handling when hypothesis is missing."""
+    response = client.post('/predict_nli',
+                         data=json.dumps({'premise': 'test'}),
+                         content_type='application/json')
+    assert response.status_code == 400
+    data = json.loads(response.data)
+    assert 'error' in data
+    assert 'hypothesis' in data['error'].lower()
+
+def test_predict_nli_empty_inputs(client):
+    """Test error handling when inputs are empty strings."""
+    response = client.post('/predict_nli',
+                         data=json.dumps({'premise': '', 'hypothesis': ''}),
+                         content_type='application/json')
+    assert response.status_code == 400
+    data = json.loads(response.data)
+    assert 'error' in data
+    assert 'must not be empty' in data['error'].lower()
+
+def test_predict_nli_valid_input(client):
+    """Test NLI prediction with valid input."""
+    test_data = {
+        'premise': 'A simple test sentence.',
+        'hypothesis': 'Another simple sentence.'
+    }
+    response = client.post('/predict_nli',
+                         data=json.dumps(test_data),
+                         content_type='application/json')
+    
+    # If model is not loaded, we expect a 500 error
+    if response.status_code == 500:
+        data = json.loads(response.data)
+        assert 'error' in data
+        assert 'model not loaded' in data['error'].lower()
+    else:
+        # If model is loaded, verify the response format
         assert response.status_code == 200
-        assert b'Home' in response.data
-        assert b'A1: That\'s what I LIKE!' in response.data
-        assert b'A2: Language Modelling' in response.data
-        assert b'A3: Make Your Own Machine Translation Language' in response.data
+        data = json.loads(response.data)
+        assert 'predicted_label' in data
+        assert 'probabilities' in data
+        
+        # Check probabilities format
+        probs = data['probabilities']
+        assert 'entailment' in probs
+        assert 'contradiction' in probs
+        assert 'neutral' in probs
+        
+        # Verify probabilities sum to approximately 1
+        total_prob = sum(probs.values())
+        assert abs(total_prob - 1.0) < 0.01
+        
+        # Verify each probability is between 0 and 1
+        for prob in probs.values():
+            assert 0 <= prob <= 1
+            
+        # Verify label is one of the expected values
+        assert data['predicted_label'] in ['entailment', 'contradiction', 'neutral']

@@ -11,3 +11,4 @@ logging==0.5.1.2
 werkzeug==3.0.1
 pytest==7.4.4
 pytest-cov==4.1.0
+transformers
