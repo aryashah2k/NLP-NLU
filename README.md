@@ -210,7 +210,7 @@ Using Hugging Face models to optimize human preference, specifically leveraging 
 **Screenshots**
 |A5 Page|
 |-------|
-|![A5](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a5.PNG)|
+|![A5](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a5.png)|
 
 
 
@@ -218,7 +218,7 @@ Using Hugging Face models to optimize human preference, specifically leveraging 
 
 |Inference Results|Training Time|Loss Plot|
 |-----------------|-------------|---------|
-|![infer]()|![traintime]()|![loss]()|
+|![infer](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a5_assets/a5_dpo_custom.png)|![traintime](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a5_assets/dpo_training_time.png)|![loss](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a5_assets/dpo_losses.png)|
 
 ##### Key Features
 
