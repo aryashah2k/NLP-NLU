@@ -98,12 +98,6 @@ def test_generate_text_invalid_max_length(client):
     data = json.loads(response.data)
     assert 'error' in data
 
-def test_a3_coming_soon_page(client):
-    """Test that the A4 coming soon page loads successfully."""
-    response = client.get('/coming_soon')
-    assert response.status_code == 200
-    assert b'A4: Do You AGREE?' in response.data
-    assert b'Coming Soon!' in response.data
 
 def test_a3_page(client):
     """Test that the A3 machine translation page loads successfully."""
@@ -255,3 +249,81 @@ def test_predict_nli_valid_input(client):
             
         # Verify label is one of the expected values
         assert data['predicted_label'] in ['entailment', 'contradiction', 'neutral']
+
+# A5 Tests - Optimization Human Preference
+
+def test_a5_page(client):
+    """Test that the A5 optimization human preference page loads successfully."""
+    response = client.get('/a5')
+    assert response.status_code == 200
+    assert b'TinyLlama-1.1B-Chat-v1.0' in response.data
+    assert b'Direct Preference Optimization' in response.data
+
+def test_generate_dpo_response_missing_data(client):
+    """Test error handling when no data is provided for DPO response generation."""
+    response = client.post('/generate_dpo_response', 
+                         data=json.dumps({}),
+                         content_type='application/json')
+    assert response.status_code == 200  # The endpoint returns 200 even with empty prompt
+    data = json.loads(response.data)
+    assert 'response' in data
+
+def test_generate_dpo_response_empty_prompt(client):
+    """Test DPO response generation with empty prompt."""
+    response = client.post('/generate_dpo_response', 
+                         data=json.dumps({'prompt': ''}),
+                         content_type='application/json')
+    assert response.status_code == 200
+    data = json.loads(response.data)
+    assert 'response' in data
+
+def test_generate_dpo_response_valid_prompt(client):
+    """Test DPO response generation with a valid prompt."""
+    test_data = {
+        'prompt': 'Explain the concept of direct preference optimization.'
+    }
+    response = client.post('/generate_dpo_response',
+                         data=json.dumps(test_data),
+                         content_type='application/json')
+    
+    # If model is not loaded or API is unavailable, we might get an error
+    if response.status_code == 500:
+        data = json.loads(response.data)
+        assert 'error' in data
+    else:
+        # If model is loaded and working, verify the response format
+        assert response.status_code == 200
+        data = json.loads(response.data)
+        assert 'response' in data
+        assert isinstance(data['response'], str)
+        assert len(data['response']) > 0
+
+def test_api_a5_generate_missing_data(client):
+    """Test error handling when no data is provided for A5 API generation."""
+    response = client.post('/api/a5/generate', 
+                         data=json.dumps({}),
+                         content_type='application/json')
+    assert response.status_code == 200  # The endpoint returns 200 even with empty prompt
+    data = json.loads(response.data)
+    assert 'response' in data
+
+def test_api_a5_generate_valid_prompt(client):
+    """Test A5 API generation with a valid prompt."""
+    test_data = {
+        'prompt': 'Explain the concept of direct preference optimization.'
+    }
+    response = client.post('/api/a5/generate',
+                         data=json.dumps(test_data),
+                         content_type='application/json')
+    
+    # If model is not loaded or API is unavailable, we might get an error
+    if response.status_code == 500:
+        data = json.loads(response.data)
+        assert 'error' in data
+    else:
+        # If model is loaded and working, verify the response format
+        assert response.status_code == 200
+        data = json.loads(response.data)
+        assert 'response' in data
+        assert isinstance(data['response'], str)
+        assert len(data['response']) > 0

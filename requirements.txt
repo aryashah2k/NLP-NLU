@@ -11,4 +11,12 @@ logging==0.5.1.2
 werkzeug==3.0.1
 pytest==7.4.4
 pytest-cov==4.1.0
-transformers
+transformers>=4.34.0
+datasets>=2.14.0
+trl>=0.7.4
+peft>=0.5.0
+accelerate>=0.23.0
+bitsandbytes>=0.41.0
+huggingface_hub>=0.17.0
+tensorboard>=2.14.0
+matplotlib>=3.5.0

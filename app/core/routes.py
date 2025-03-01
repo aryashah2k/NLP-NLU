@@ -6,13 +6,15 @@ from app.assignments.a1_word_embeddings.utils import load_model, find_similar_wo
 import torch
 from app.assignments.a2_language_modelling.utils import LSTMLanguageModel, Vocabulary, generate_text
 from app.assignments.a4_do_you_agree.inference import NLIPredictor
+from app.assignments.a5_optimization_human_preference.inference import get_predictor
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
 # Global dictionary to store loaded models
 models = {
     'a1': {},
     'a2': None,
-    'a4': None
+    'a4': None,
+    'a5': None
 }
 
 # Setup logging
@@ -146,6 +148,20 @@ def load_models():
             logger.error(f"A4 model directory not found: {a4_model_dir}")
     except Exception as e:
         logger.error(f"Error loading A4 model: {e}")
+        logger.error(f"Traceback: {traceback.format_exc()}")
+    
+    # Load A5 DPO model
+    try:
+        logger.info("Loading A5 DPO model")
+        try:
+            # Initialize the DPO predictor with the Hugging Face Inference API
+            models['a5'] = get_predictor(model_name="TinyLlama/TinyLlama-1.1B-Chat-v1.0")
+            logger.info("Successfully initialized A5 DPO predictor")
+        except Exception as e:
+            logger.error(f"Error initializing DPO predictor: {e}")
+            logger.error(f"Traceback: {traceback.format_exc()}")
+    except Exception as e:
+        logger.error(f"Error loading A5 model: {e}")
         logger.error(f"Traceback: {traceback.format_exc()}")
     
 def register_routes(app):
@@ -329,6 +345,59 @@ def register_routes(app):
         except Exception as e:
             logger.error(f"Error in predict_nli: {str(e)}")
             logger.error(f"Traceback: {traceback.format_exc()}")
+            return jsonify({'error': str(e)}), 500
+    
+    @app.route('/a5')
+    def a5():
+        """Route for Assignment 5: Optimization Human Preference."""
+        return render_template('a5.html')
+    
+    @app.route('/api/a5/generate', methods=['POST'])
+    def a5_generate():
+        """API endpoint for A5 text generation."""
+        try:
+            data = request.get_json()
+            prompt = data.get("prompt", "")
+            
+            # Initialize the model if it hasn't been already
+            from app.assignments.a5_optimization_human_preference.inference import get_predictor
+            
+            # Use TinyLlama model
+            model = get_predictor(model_name="TinyLlama/TinyLlama-1.1B-Chat-v1.0")
+            
+            # Generate response
+            response = model.generate_response(prompt)
+            
+            return jsonify({"response": response})
+        
+        except Exception as e:
+            app.logger.error(f"Error in A5 generation: {str(e)}")
+            return jsonify({"error": str(e)}), 500
+    
+    @app.route('/generate_dpo_response', methods=['POST'])
+    def generate_dpo_response():
+        """Handle DPO response generation requests."""
+        try:
+            # Get the prompt from the request
+            data = request.get_json()
+            prompt = data.get('prompt', '')
+            
+            # Log the incoming request
+            app.logger.info(f"Received DPO response generation request with prompt: {prompt[:50]}...")
+            
+            # Check if the model is loaded
+            if 'a5' not in models:
+                from app.assignments.a5_optimization_human_preference.inference import get_predictor
+                models['a5'] = get_predictor(model_name="TinyLlama/TinyLlama-1.1B-Chat-v1.0")
+            
+            # Generate response
+            response = models['a5'].generate_response(prompt)
+            
+            # Return the response
+            return jsonify({'response': response})
+            
+        except Exception as e:
+            app.logger.error(f"Error generating DPO response: {str(e)}")
             return jsonify({'error': str(e)}), 500
 
     # Load models when registering routes

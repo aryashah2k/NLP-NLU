@@ -8,7 +8,8 @@ This repository contains my assignments for the AT82.05 Artificial Intelligence:
 |<a href="https://github.com/aryashah2k/NLP-NLU/tree/main?tab=readme-ov-file#a2-language-modelling">A2: Language modelling</a>|
 |<a href="https://github.com/aryashah2k/NLP-NLU/tree/main?tab=readme-ov-file#a3-make-your-own-machine-translation-language">A3: Make Your Own Machine Translation Language</a>|
 |<a href="https://github.com/aryashah2k/NLP-NLU/tree/main?tab=readme-ov-file#a4-do-you-agree">A4: Do You AGREE!</a>|
-|<a href="https://github.com/aryashah2k/NLP-NLU/blob/main/app/static/coming_soon.gif">A5....Coming Soon!</a>|
+|<a href="https://github.com/aryashah2k/NLP-NLU/tree/main?tab=readme-ov-file#a5-optimization-human-preference">A5: Optimization Human Preference</a>|
+|<a href="https://github.com/aryashah2k/NLP-NLU/blob/main/app/static/coming_soon.gif">A6....Coming Soon!</a>|
 |<a href="https://github.com/aryashah2k/NLP-NLU/tree/main?tab=readme-ov-file#setup-and-installation">Setup & Installation</a>|
 
 ## Project Structure
@@ -196,6 +197,53 @@ The model's performance on the SNLI/MNLI dataset shows several key characteristi
    - Model confidence (cosine similarities) could be more distinctive between classes
 
 The model shows promise but would benefit from further optimization and larger training datasets for production use.
+
+------------------
+
+### A5: Optimization Human Preference
+Using Hugging Face models to optimize human preference, specifically leveraging the Direct Preference Optimization (DPO) trainer. Worked with preference datasets, train a model, and push it to the Hugging Face model hub
+
+| App Demo | 
+|----------|
+| <img src="https://github.com/aryashah2k/NLP-NLU/blob/main/assets/A5_Demo.gif"> |
+
+**Screenshots**
+|A5 Page|
+|-------|
+|![A5](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a5.PNG)|
+
+
+
+#### Summary of Results
+
+|Inference Results|Training Time|Loss Plot|
+|-----------------|-------------|---------|
+|![infer]()|![traintime]()|![loss]()|
+
+##### Key Features
+
+1. Dataset Processing: Uses Anthropic's HH-RLHF (Human Harmlessness - Reinforcement Learning from Human Feedback) dataset containing pairs of preferred and dispreferred responses.
+2. Efficient Training with QLoRA: Implements Parameter-Efficient Fine-Tuning using QLoRA (Quantized Low-Rank Adaptation) to reduce memory requirements while maintaining performance.
+3. 4-bit Quantization: Utilizes the BitsAndBytes library to enable 4-bit quantization, significantly reducing the memory footprint of the model.
+4. Training Visualization: Includes a comprehensive visualization system that tracks and plots training metrics including losses and reward accuracy.
+5. Hugging Face Integration: Seamlessly uploads the trained model to Hugging Face Hub for easy sharing and deployment.
+
+##### Technical Implementation
+- Base Model: TinyLlama-1.1B-Chat-v1.0
+- Training Method: Direct Preference Optimization (DPO)
+- Quantization: 4-bit quantization using BitsAndBytes
+- Parameter-Efficient Fine-Tuning: QLoRA with rank 16, alpha 32
+- Target Modules: Attention layers (q_proj, k_proj, v_proj, o_proj) and MLP layers (gate_proj, up_proj, down_proj)
+- Training Dataset: 5,000 examples from Anthropic's HH-RLHF
+- Evaluation Dataset: 500 examples for validation
+
+##### Training Process
+1. Loads and preprocesses the Anthropic HH-RLHF dataset
+2. Initializes the TinyLlama model with 4-bit quantization
+3. Applies QLoRA for parameter-efficient fine-tuning
+4. Trains using the DPO algorithm to optimize for human preferences
+5. Tracks and visualizes training metrics
+6. Saves and uploads the trained model to Hugging Face Hub
 
 ------------------
 
