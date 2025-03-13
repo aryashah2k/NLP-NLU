@@ -354,4 +354,4 @@ Both scripts implement Retrieval-Augmented Generation (RAG) systems for answerin
 You can also run the tests individually by specifying the target file to test
 
 ## License
-© 2024 Arya Shah. All rights reserved. | MIT
+© 2024 Arya Shah. All rights reserved. | Under MIT License
