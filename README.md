@@ -9,7 +9,8 @@ This repository contains my assignments for the AT82.05 Artificial Intelligence:
 |<a href="https://github.com/aryashah2k/NLP-NLU/tree/main?tab=readme-ov-file#a3-make-your-own-machine-translation-language">A3: Make Your Own Machine Translation Language</a>|
 |<a href="https://github.com/aryashah2k/NLP-NLU/tree/main?tab=readme-ov-file#a4-do-you-agree">A4: Do You AGREE!</a>|
 |<a href="https://github.com/aryashah2k/NLP-NLU/tree/main?tab=readme-ov-file#a5-optimization-human-preference">A5: Optimization Human Preference</a>|
-|<a href="https://github.com/aryashah2k/NLP-NLU/blob/main/app/static/coming_soon.gif">A6....Coming Soon!</a>|
+|<a href="https://github.com/aryashah2k/NLP-NLU/tree/main?tab=readme-ov-file#a6-lets-talk-yourselves">A6: Lets Talk Yourselves!</a>|
+|<a href="https://github.com/aryashah2k/NLP-NLU/blob/main/app/static/coming_soon.gif">A7....Coming Soon!</a>|
 |<a href="https://github.com/aryashah2k/NLP-NLU/tree/main?tab=readme-ov-file#setup-and-installation">Setup & Installation</a>|
 
 ## Project Structure
@@ -252,16 +253,16 @@ Applied RAG (Retrieval-Augmented Generation) techniques in Langchain framework a
 
 | App Demo |Generated JSON Response|
 |----------|-----------------------|
-| <img src="https://github.com/aryashah2k/NLP-NLU/blob/main/assets/A6_Demo.gif"> |<a href="Link Here">Click Here</a>|
+| <img src="https://github.com/aryashah2k/NLP-NLU/blob/main/assets/A6_Demo.gif"> |<a href="https://github.com/aryashah2k/NLP-NLU/blob/main/app/assignments/a6_talk_with_yourselves/qa_responses.json">Click Here</a>|
 
 **Screenshots**
 |Main_Chat|Sources|Recommendation|
 |---------|-------|--------------|
-|![main_chat]()|![Sources]()|![Recommendation]()|
+|![main_chat](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a6_assets/main_chat.PNG)|![Sources](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a6_assets/sources.PNG)|![Recommendation](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a6_assets/recommendations.PNG)|
 
 |Retriever Analysis|Generator Analysis|Analyze Question|
 |---------|-------|--------------|
-|![retriever]()|![generator]()|![analyze]()|
+|![retriever](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a6_assets/retriever_analysis.PNG)|![generator](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a6_assets/generator_analysis.PNG)|![analyze](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a6_assets/analyze_question.PNG)|
 
 
 #### Analysis of Both Scripts:
