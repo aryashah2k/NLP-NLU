@@ -1,0 +1,138 @@
+{% extends "index.html" %}
+{% block content %}
+<h2 class="fh5co-heading" data-animate-effect="fadeInLeft">Assignment 6: Lets Talk Yourselves</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Personal RAG Chatbot</h3>
+                    <p class="text-white">Ask me anything about Arya Shah's personal information, education, work experience, or beliefs.</p>
+                </div>
+                <div class="card-body">
+                    <!-- Chat Container -->
+                    <div class="chat-container">
+                        <div class="chat-messages" id="chat-messages">
+                            <div class="message system">
+                                <div class="message-content">
+                                    <p>Hello! I'm a personal RAG chatbot that can answer questions about Arya Shah. How can I help you today?</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="chat-input">
+                            <input type="text" id="user-input" placeholder="Ask me anything...">
+                            <button id="send-btn">Send</button>
+                        </div>
+                    </div>
+                    
+                    <!-- Sources Panel -->
+                    <div class="sources-panel" id="sources-panel">
+                        <h4>Sources</h4>
+                        <div class="sources-content" id="sources-content">
+                            <p class="no-sources">Ask a question to see sources.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Model Analysis Section -->
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Model Analysis</h3>
+                </div>
+                <div class="card-body">
+                    <div class="analysis-tabs">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="retriever-tab-btn" data-bs-toggle="tab" data-bs-target="#retriever-tab" type="button" role="tab" aria-controls="retriever-tab" aria-selected="true">Retriever Model</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="generator-tab-btn" data-bs-toggle="tab" data-bs-target="#generator-tab" type="button" role="tab" aria-controls="generator-tab" aria-selected="false">Generator Model</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="recommendations-tab-btn" data-bs-toggle="tab" data-bs-target="#recommendations-tab" type="button" role="tab" aria-controls="recommendations-tab" aria-selected="false">Recommendations</button>
+                            </li>
+                        </ul>
+                        
+                        <div class="tab-content mt-3" id="myTabContent">
+                            <!-- Retriever Model Analysis -->
+                            <div class="tab-pane fade show active" id="retriever-tab" role="tabpanel" aria-labelledby="retriever-tab-btn">
+                                <h4>Retriever Model Analysis</h4>
+                                <div class="model-info">
+                                    <p><strong>Model:</strong> sentence-transformers/all-mpnet-base-v2</p>
+                                    <p><strong>Vector Store:</strong> FAISS (Facebook AI Similarity Search)</p>
+                                    <p><strong>Average Relevance Score:</strong> {{ "%.2f"|format(retriever_analysis.average_relevance) }} (0-1 scale)</p>
+                                    <p><strong>Irrelevant Retrievals:</strong> {{ "%.1f"|format(retriever_analysis.irrelevant_percentage) }}%</p>
+                                </div>
+                                
+                                <div class="issues-mitigations">
+                                    <h5>Recommendations:</h5>
+                                    <ul>
+                                    {% for recommendation in retriever_analysis.recommendations %}
+                                        <li>{{ recommendation }}</li>
+                                    {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Generator Model Analysis -->
+                            <div class="tab-pane fade" id="generator-tab" role="tabpanel" aria-labelledby="generator-tab-btn">
+                                <h4>Generator Model Analysis</h4>
+                                <div class="model-info">
+                                    <p><strong>Model:</strong> google/flan-t5-base</p>
+                                    <p><strong>Hallucination Percentage:</strong> {{ "%.1f"|format(generator_analysis.hallucination_percentage) }}%</p>
+                                </div>
+                                
+                                <div class="issues-mitigations">
+                                    <h5>Recommendations:</h5>
+                                    <ul>
+                                    {% for recommendation in generator_analysis.recommendations %}
+                                        <li>{{ recommendation }}</li>
+                                    {% endfor %}
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <!-- Recommendations -->
+                            <div class="tab-pane fade" id="recommendations-tab" role="tabpanel" aria-labelledby="recommendations-tab-btn">
+                                <h4>Recommendations for Improvement</h4>
+                                <h5>Retriever Model Recommendations:</h5>
+                                <ul>
+                                    {% for recommendation in retriever_analysis.recommendations %}
+                                    <li>{{ recommendation }}</li>
+                                    {% endfor %}
+                                </ul>
+                                
+                                <h5>Generator Model Recommendations:</h5>
+                                <ul>
+                                    {% for recommendation in generator_analysis.recommendations %}
+                                    <li>{{ recommendation }}</li>
+                                    {% endfor %}
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Live Analysis Section -->
+                    <div class="live-analysis mt-4">
+                        <h4>Analyze Your Question</h4>
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" id="analysis-input" placeholder="Enter a question to analyze...">
+                            <button class="btn btn-primary" id="analyze-btn">Analyze</button>
+                        </div>
+                        <div class="analysis-results">
+                            <div id="analysis-loading" style="display: none;">Analyzing...</div>
+                            <div id="analysis-content"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/a6_style.css') }}">
+<script src="{{ url_for('static', filename='js/a6_script.js') }}"></script>
+{% endblock %}

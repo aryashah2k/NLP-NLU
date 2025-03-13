@@ -1,0 +1,65 @@
+PERSONAL INFORMATION
+Name: Arya Shah
+Date of Birth: 16th June, 2000
+Current Status: Master's Student in Data Science and AI
+
+EDUCATION
+- Master of Science (M.S) - Data Science and AI
+  - Asian Institute Of Technology, Pathumthani, Thailand
+  - July 2024 - July 2026
+
+- Master of Technology (M.Tech) - Artificial Intelligence
+  - Indian Institute Of Technology (IIT), Gandhinagar, India
+  - July 2024 - July 2026
+
+SKILLS
+- Languages: Python, SQL, JavaScript, C++, Rust
+- Frameworks: Scikit, NLTK, SpaCy, TensorFlow, PyTorch, Keras, Langchain, FastAPI, Streamlit, Flask, Express, HTML, CSS, ReactJS, NextJS, NodeJS, Prisma, Typescript
+- Tools: Docker, MLflow, Traefik, Kubernetes, GIT, MongoDB, PostgreSQL, Postman, Power BI, Jira, StarUML
+- Platforms: AWS, Azure, Vercel, Netlify, OpenAI, HuggingFace, Heroku, Salesforce
+
+EXPERIENCE
+- ZS Associates, Pune, India
+  - Associate Software Engineer (Full-time)
+  - Responsibilities:
+    - Developed automation scripts and API solutions using SQL, SSJS, AMPscript, HTML, CSS, Python, and Postman to scale and serve 12 million users daily
+    - Engineered utility tools and scripts to streamline system integration testing, achieving a 66.67% reduction in manual effort
+    - Developed package to enable real-time dynamic email content generation driven by large language model (LLM) data by integrating GPT APIs
+
+- LyondellBasell, Mumbai, India
+  - Cloud DevOps Engineer (Internship)
+  - Responsibilities:
+    - Migrated C# project build pipelines from Azure DevOps to GitHub Actions using DevSecOps solutions
+
+PROJECTS
+- metaheuRUSTics: A comprehensive Rust library for metaheuristic optimization algorithms, providing efficient implementations of various optimization techniques, hosted on crates.io
+- 3DNNVisualizer: 3D Neural Network visualizer for YOLO v2 - tiny, AlexNet, LeNet. Built with Javascript, Tensorflow JS, Keras and TensorSpace JS
+- Pac-VR: Classic Pacman in VR, suitable for Google Cardboard and equivalent devices. Built with Javascript, A-Frame, HTML, CSS
+- AryaGPT: Webapp to answer questions about my resume leveraging Langchain, OpenAI, Streamlit
+
+RESEARCH PUBLICATIONS
+- Auto-delineation of the Hippocampus using Mask R-CNN for Radiation Oncology
+- Audio Classification of Emergency Vehicle Sirens Using Recurrent Neural Network Architectures
+- Monkeypox Skin Lesion Classification Using Transfer Learning Approach
+- Prediction of Polycystic Ovary Syndrome (PCOS) Using Optimized Machine Learning Classifiers
+
+CERTIFICATIONS
+- AZ-900, Microsoft Certified: Azure Fundamentals
+- DP-900, Microsoft Certified: Azure Data Fundamentals
+- AI-900, Microsoft Certified: Azure AI Fundamentals
+
+PATENTS
+- Intellectual Property of India, Patent Number: 202321049964
+  - Detection Of Anomalies In Civil Infrastructure Using Context Aware Semantic Computer Vision Techniques
+
+- Intellectual Property of India, Patent Number: 202321055491
+  - Multi-Sensor Vehicle Positioning System Employing Shared Data Protocol
+
+- United Kingdom Design Grant, Design Number: 6343269
+  - Wireless Transaction Security Device
+
+- Intellectual Property of India, Patent Number: 202311072507
+  - Image Based Automated Measurement Model To Predict Pelvic Organ Prolapse
+
+- Intellectual Property of India, Patent Number: 202341044029
+  - Method Of Analyzing Or Generating Sequence Of Encoding Elements

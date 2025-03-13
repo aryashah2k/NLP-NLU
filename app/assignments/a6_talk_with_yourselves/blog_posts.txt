@@ -1,0 +1,66 @@
+PERSONAL BLOG POSTS
+
+Title: My Journey So Far - Personal Reflections
+Date: March 8, 2025
+
+As I settle into my new academic journey at AIT, I've been reflecting on my personal and professional path. I'm currently 24 years old, having been born on June 16, 2000. Time flies when you're pursuing your passions!
+
+My educational journey has been quite exciting. I'm currently pursuing dual Master's degrees - one in Data Science and AI at the Asian Institute of Technology in Thailand, and another in Artificial Intelligence at the Indian Institute of Technology in Gandhinagar. Before this, I completed my Bachelor's in Computer Science and Business Systems from NMIMS in 2023.
+
+Throughout my education, I've focused on computer science with specializations in artificial intelligence, machine learning, and data science. These fields fascinate me because they sit at the intersection of mathematical theory and practical problem-solving with real-world impact.
+
+----
+
+Title: My Professional Experience in Tech
+Date: March 10, 2025
+
+I have about 2 years of professional work experience in the technology industry. After completing my undergraduate studies, I worked as an Associate Software Engineer at ZS Associates in Pune, India. The tech industry has provided me with incredible opportunities to apply my theoretical knowledge to practical challenges.
+
+At ZS Associates, my role involved developing automation scripts and API solutions using various technologies including SQL, SSJS, AMPscript, HTML, CSS, Python, and Postman. One of my major achievements was building solutions that could scale to serve 12 million users daily. I also engineered utility tools and scripts that streamlined system integration testing, which reduced manual effort by nearly 67%.
+
+One of my favorite projects was developing a package that enabled real-time dynamic email content generation driven by large language models. This involved integrating GPT APIs to create personalized content at scale - a fascinating blend of NLP and software engineering.
+
+Before my full-time role, I also completed an internship as a Cloud DevOps Engineer at LyondellBasell in Mumbai, where I focused on migrating C# project build pipelines from Azure DevOps to GitHub Actions using DevSecOps solutions.
+
+----
+
+Title: Technology and Society - My Core Beliefs
+Date: February 15, 2025
+
+I've been thinking deeply about the role of technology in society, especially as I advance in my studies and career. I firmly believe that technology should be accessible to everyone regardless of their background or socioeconomic status. Digital inclusion isn't just a nice-to-have; it's a necessity in our increasingly connected world.
+
+Privacy and data security are fundamental rights that must be protected. As someone working in AI and data science, I'm acutely aware of the ethical implications of the technologies we build. I believe we have a responsibility to develop systems that respect user privacy and maintain data security as core principles, not afterthoughts.
+
+I'm also passionate about open source collaboration and knowledge sharing. The collective intelligence of diverse communities often leads to more robust and innovative solutions than what any individual or closed team could develop. This is why I've contributed to open source projects like my metaheuRUSTics library.
+
+Environmental sustainability must be central to technological development. The tech industry has a significant carbon footprint, and finding ways to reduce this impact is a responsibility we all share. Sustainable and environmentally conscious tech development isn't optional - it's our duty to future generations.
+
+----
+
+Title: Cultural Values and Technological Innovation
+Date: January 20, 2025
+
+As someone with an Indian background now studying in Thailand, I've been reflecting on how cultural values influence technological advancement. I believe that diverse cultural perspectives are essential for creating truly inclusive and effective technology.
+
+Technology should enhance human connection rather than replace it. Different cultures have different approaches to community, communication, and problem-solving, and these perspectives can greatly enrich our technological solutions. For instance, the collective-oriented values in many Asian cultures can inform how we design collaborative technologies.
+
+Traditional knowledge systems hold wisdom that modern technology can learn from. Indigenous approaches to sustainability, community-building, and problem-solving offer valuable insights that can inform how we design and implement technological solutions. This integration of traditional wisdom with cutting-edge innovation is something I strive to incorporate in my work.
+
+I believe that technological development should be guided by cultural values like respect, empathy, and community welfare. When we center these values, we create technology that truly serves humanity rather than the other way around.
+
+----
+
+Title: Challenges and Aspirations in My Master's Journey
+Date: March 5, 2025
+
+The most challenging aspect of my master's studies so far has been balancing the rigorous academic requirements across two programs simultaneously. Managing coursework, research, and personal projects requires careful time management and prioritization skills.
+
+Keeping up with the rapidly evolving fields of machine learning and deep learning is another significant challenge. It seems like groundbreaking papers and new techniques emerge weekly! This constant evolution is both exciting and daunting, as it requires continuous learning and adaptation.
+
+Finding novel research directions in such competitive fields as AI and ML is difficult. It often feels like every interesting idea has already been explored by someone else. This pushes me to look for unique intersections between disciplines where innovation can flourish.
+
+As for my research interests and academic goals, I'm particularly focused on natural language processing, deep learning applications, computer vision, and metaheuristic optimization. I hope to publish research papers in top-tier conferences, especially in the area of audio question answering, which is the focus of my thesis.
+
+I'm also passionate about developing open-source tools for educational purposes. My projects like the 3D Neural Network Visualizer reflect this interest in making complex concepts more accessible. Additionally, I hope to mentor undergraduate students in AI and machine learning, passing on knowledge while also learning from fresh perspectives.
+
+Securing funding for experimental research projects remains a challenge, but I'm developing skills in writing compelling grant proposals and effectively communicating the value of my research ideas - abilities that will serve me well beyond academia.

@@ -247,6 +247,89 @@ Using Hugging Face models to optimize human preference, specifically leveraging 
 
 ------------------
 
+### A6: Lets Talk Yourselves
+Applied RAG (Retrieval-Augmented Generation) techniques in Langchain framework and from scratch to augment my chatbot that specializes in answering questions related to myself, my documents, resume, and any other relevant information
+
+| App Demo |Generated JSON Response|
+|----------|-----------------------|
+| <img src="https://github.com/aryashah2k/NLP-NLU/blob/main/assets/A6_Demo.gif"> |<a href="Link Here">Click Here</a>|
+
+**Screenshots**
+|Main_Chat|Sources|Recommendation|
+|---------|-------|--------------|
+|![main_chat]()|![Sources]()|![Recommendation]()|
+
+|Retriever Analysis|Generator Analysis|Analyze Question|
+|---------|-------|--------------|
+|![retriever]()|![generator]()|![analyze]()|
+
+
+#### Analysis of Both Scripts:
+
+| Feature | personal_rag.py | simple_rag.py |
+|---------|----------------|---------------|
+| **Framework** | Uses LangChain for RAG implementation | Custom implementation without LangChain dependency |
+| **Architecture** | Structured around LangChain components (document loaders, text splitters, embeddings, vector stores) | Implements similar components but with custom classes |
+| **Embedding Model** | Uses HuggingFaceEmbeddings with 'sentence-transformers/all-mpnet-base-v2' | Custom SentenceEmbedder class using the same model |
+| **Vector Store** | Uses FAISS through LangChain's wrapper | Direct implementation with FAISS library |
+| **LLM** | Uses HuggingFacePipeline with 'google/flan-t5-base' | Custom TextGenerator class with the same model |
+| **Document Processing** | Uses RecursiveCharacterTextSplitter | Custom splitting function with similar parameters |
+| **Memory** | Includes ConversationBufferMemory for chat history | Maintains chat history in a simple list structure |
+| **Prompt Template** | Uses LangChain's PromptTemplate | Hardcoded prompt string in the query method |
+| **Chain Type** | Uses RetrievalQA with "stuff" chain type | Custom implementation combining retrieval and generation |
+| **Persona** | References "John Smith" in prompt | References "Arya Shah" in prompt |
+| **Persistence** | Saves vector store only | Saves both vector store and chat history |
+
+Both scripts implement Retrieval-Augmented Generation (RAG) systems for answering questions about personal information, but with different approaches to the implementation architecture.
+
+##### JSON Response ✅
+
+```json
+[
+  {
+    "question": "How old are you?",
+    "answer": "24 years old."
+  },
+  {
+    "question": "What is your highest level of education?",
+    "answer": "Master's degrees."
+  },
+  {
+    "question": "What major or field of study did you pursue during your bachelor education?",
+    "answer": "Computer Science."
+  },
+  {
+    "question": "How many years of work experience do you have?",
+    "answer": "2 years."
+  },
+  {
+    "question": "What type of work or industry have you been involved in?",
+    "answer": "technology industry."
+  },
+  {
+    "question": "Can you describe your current role or job responsibilities?",
+    "answer": "Associate Software Engineer (Full-time)"
+  },
+  {
+    "question": "What are your core beliefs regarding the role of technology in shaping society?",
+    "answer": "I believe that technological development should be guided by cultural values like respect, empathy, and community welfare."
+  },
+  {
+    "question": "How do you think cultural values should influence technological advancements?",
+    "answer": "We create technology that truly serves humanity rather than the other way around."
+  },
+  {
+    "question": "As a master's student, what is the most challenging aspect of your studies so far?",
+    "answer": "balancing the rigorous academic requirements across two programs simultaneously."
+  },
+  {
+    "question": "What specific research interests or academic goals do you hope to achieve during your time as a master's student?",
+    "answer": "natural language processing, deep learning applications, computer vision, and metaheuristic optimization."
+  }
+]
+```
+------------------
+
 ## Setup and Installation
 
 1. Clone the repository

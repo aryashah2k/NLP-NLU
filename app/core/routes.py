@@ -7,6 +7,9 @@ import torch
 from app.assignments.a2_language_modelling.utils import LSTMLanguageModel, Vocabulary, generate_text
 from app.assignments.a4_do_you_agree.inference import NLIPredictor
 from app.assignments.a5_optimization_human_preference.inference import get_predictor
+from app.assignments.a6_talk_with_yourselves.simple_rag import initialize_rag_system
+from app.assignments.a6_talk_with_yourselves.model_analysis import analyze_retriever_model, analyze_generator_model
+import json
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
 # Global dictionary to store loaded models
@@ -14,8 +17,12 @@ models = {
     'a1': {},
     'a2': None,
     'a4': None,
-    'a5': None
+    'a5': None,
+    'a6': None
 }
+
+# Store conversation history for A6
+qa_history = []
 
 # Setup logging
 logging.basicConfig(
@@ -162,6 +169,31 @@ def load_models():
             logger.error(f"Traceback: {traceback.format_exc()}")
     except Exception as e:
         logger.error(f"Error loading A5 model: {e}")
+        logger.error(f"Traceback: {traceback.format_exc()}")
+    
+    # Load A6 RAG model
+    try:
+        logger.info("Initializing A6 RAG system...")
+        models['a6'] = initialize_rag_system()
+        
+        # Run initial model analysis with a few test questions for A6
+        test_questions = [
+            "How old are you?",
+            "What is your highest level of education?",
+            "What are your core beliefs regarding technology?",
+            "What programming languages do you know?",
+            "Where did you work before Google?"
+        ]
+        
+        # Store analysis results
+        models['a6_analysis'] = {
+            'retriever_analysis': analyze_retriever_model(models['a6'], test_questions, verbose=False),
+            'generator_analysis': analyze_generator_model(models['a6'], test_questions, verbose=False)
+        }
+        
+        logger.info("A6 RAG system initialized and ready to use")
+    except Exception as e:
+        logger.error(f"Error loading A6 RAG model: {str(e)}")
         logger.error(f"Traceback: {traceback.format_exc()}")
     
 def register_routes(app):
@@ -399,6 +431,113 @@ def register_routes(app):
         except Exception as e:
             app.logger.error(f"Error generating DPO response: {str(e)}")
             return jsonify({'error': str(e)}), 500
+
+    @app.route('/a6')
+    def a6():
+        """Route for Assignment 6: Talk With Yourselves."""
+        if 'a6' not in models or models['a6'] is None or 'a6_analysis' not in models:
+            # Initialize RAG system if not already loaded
+            try:
+                logger.info("Initializing A6 RAG system on demand...")
+                models['a6'] = initialize_rag_system()
+                
+                # Run initial model analysis with a few test questions
+                test_questions = [
+                    "How old are you?",
+                    "What is your highest level of education?",
+                    "What are your core beliefs regarding technology?",
+                    "What programming languages do you know?",
+                    "Where did you work before Google?"
+                ]
+                
+                # Store analysis results
+                models['a6_analysis'] = {
+                    'retriever_analysis': analyze_retriever_model(models['a6'], test_questions, verbose=False),
+                    'generator_analysis': analyze_generator_model(models['a6'], test_questions, verbose=False)
+                }
+                
+                logger.info("A6 RAG system initialized on demand")
+            except Exception as e:
+                logger.error(f"Error initializing A6 RAG system on demand: {str(e)}")
+                logger.error(f"Traceback: {traceback.format_exc()}")
+                return render_template('coming_soon.html')
+        
+        return render_template('a6.html', 
+                              retriever_analysis=models['a6_analysis']['retriever_analysis'],
+                              generator_analysis=models['a6_analysis']['generator_analysis'])
+    
+    @app.route('/a7')
+    def a7():
+        """Route for Assignment 7: Coming Soon."""
+        return render_template('a7.html')
+    
+    @app.route('/chat', methods=['POST'])
+    def chat():
+        """Process chat messages and return responses for A6."""
+        data = request.json
+        user_message = data.get('message', '')
+        
+        if not user_message:
+            return jsonify({"error": "No message provided"}), 400
+        
+        # Check if RAG system is initialized
+        if 'a6' not in models or models['a6'] is None:
+            return jsonify({"error": "RAG system not initialized"}), 500
+        
+        # Query the RAG system
+        result = models['a6'].query(user_message)
+        
+        # Add to history
+        qa_pair = {
+            "question": result["question"],
+            "answer": result["answer"]
+        }
+        qa_history.append(qa_pair)
+        
+        # Save the updated history to a JSON file
+        qa_history_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), 
+                                      'assignments', 'a6_talk_with_yourselves', 'qa_history.json')
+        with open(qa_history_path, 'w') as f:
+            json.dump(qa_history, f, indent=2)
+        
+        # Return the result
+        return jsonify({
+            "answer": result["answer"],
+            "sources": result["sources"]
+        })
+
+    @app.route('/qa_history', methods=['GET'])
+    def get_qa_history():
+        """Return the question-answer history for A6."""
+        return jsonify(qa_history)
+
+    @app.route('/analyze', methods=['POST'])
+    def analyze_question():
+        """Analyze a specific question with both models for A6."""
+        data = request.json
+        question = data.get('question', '')
+        
+        if not question:
+            return jsonify({"error": "No question provided"}), 400
+        
+        # Check if RAG system is initialized
+        if 'a6' not in models or models['a6'] is None:
+            return jsonify({"error": "RAG system not initialized"}), 500
+        
+        # Analyze with retriever model
+        retriever_results = models['a6'].vector_store.similarity_search(question)
+        
+        # Analyze with generator model (get full response)
+        generation_result = models['a6'].query(question)
+        
+        # Return analysis results
+        return jsonify({
+            "retriever_results": retriever_results,
+            "generation_result": {
+                "answer": generation_result["answer"],
+                "sources": generation_result["sources"]
+            }
+        })
 
     # Load models when registering routes
     load_models()

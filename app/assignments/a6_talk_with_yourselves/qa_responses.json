@@ -1,0 +1,42 @@
+[
+  {
+    "question": "How old are you?",
+    "answer": "24 years old."
+  },
+  {
+    "question": "What is your highest level of education?",
+    "answer": "Master's degrees."
+  },
+  {
+    "question": "What major or field of study did you pursue during your education?",
+    "answer": "Computer Science."
+  },
+  {
+    "question": "How many years of work experience do you have?",
+    "answer": "2 years."
+  },
+  {
+    "question": "What type of work or industry have you been involved in?",
+    "answer": "technology industry."
+  },
+  {
+    "question": "Can you describe your current role or job responsibilities?",
+    "answer": "Associate Software Engineer (Full-time)"
+  },
+  {
+    "question": "What are your core beliefs regarding the role of technology in shaping society?",
+    "answer": "I believe that technological development should be guided by cultural values like respect, empathy, and community welfare."
+  },
+  {
+    "question": "How do you think cultural values should influence technological advancements?",
+    "answer": "We create technology that truly serves humanity rather than the other way around."
+  },
+  {
+    "question": "As a master's student, what is the most challenging aspect of your studies so far?",
+    "answer": "balancing the rigorous academic requirements across two programs simultaneously."
+  },
+  {
+    "question": "What specific research interests or academic goals do you hope to achieve during your time as a master's student?",
+    "answer": "natural language processing, deep learning applications, computer vision, and metaheuristic optimization."
+  }
+]

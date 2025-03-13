@@ -1,0 +1,45 @@
+Name: Arya Shah
+Age: 24
+Date of Birth: June 16, 2000
+Nationality: Indian
+
+Education:
+- Master's in Data Science and AI, Asian Institute of Technology, Thailand (2024-2026)
+- Master's in Data Science and AI, Indian Institute of Technology, Gandhinagar (2024-2026)
+- Bachelor's in Computer Science and Business Systems, NMIMS (2019-2023)
+
+Research Interests:
+- Natural Language Processing
+- Machine Learning
+- Computer Vision
+- Metaheuristric Optimization
+
+Core Beliefs:
+- Technology should be accessible to everyone regardless of background or socioeconomic status
+- Ethical considerations should be at the forefront of technological development
+- Open source collaboration drives innovation and creates better solutions
+- Privacy and data security are fundamental rights in the digital age
+
+Cultural Values:
+- Diversity and inclusion in tech are essential for creating products that serve all people
+- Traditional knowledge systems should be respected and integrated with modern technology
+- Technology should enhance human connection rather than replace it
+- Sustainable and environmentally conscious tech development is a responsibility
+
+Academic Goals:
+- Publish research papers in top-tier conferences on Deep Learning applications
+- Develop open-source tools for educational purposes
+- Complete thesis on "Audio Question Answering"
+- Mentor undergraduate students in AI and Machine Learning
+
+Challenges in Master's Studies:
+- Balancing research work with coursework requirements
+- Keeping up with rapidly evolving field of machine learning and deep learning
+- Finding novel research directions in a competitive academic environment
+- Securing funding for experimental research projects
+
+Personal Projects:
+- Created a Rust Library for metaheuristic Optimization
+- Developed a 3D Neural Networtk Visualizer
+- Developed a webapp to answer questions about my resume leveraging Langchain, OpenAI, Streamlit
+
