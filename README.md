@@ -278,7 +278,7 @@ Applied RAG (Retrieval-Augmented Generation) techniques in Langchain framework a
 | **Memory** | Includes ConversationBufferMemory for chat history | Maintains chat history in a simple list structure |
 | **Prompt Template** | Uses LangChain's PromptTemplate | Hardcoded prompt string in the query method |
 | **Chain Type** | Uses RetrievalQA with "stuff" chain type | Custom implementation combining retrieval and generation |
-| **Persona** | References "John Smith" in prompt | References "Arya Shah" in prompt |
+| **Persona** | References "Arya Shah" in prompt | References "Arya Shah" in prompt |
 | **Persistence** | Saves vector store only | Saves both vector store and chat history |
 
 Both scripts implement Retrieval-Augmented Generation (RAG) systems for answering questions about personal information, but with different approaches to the implementation architecture.
