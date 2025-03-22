@@ -1,0 +1,119 @@
+{% extends "index.html" %}
+{% block content %}
+<h2 class="fh5co-heading" data-animate-effect="fadeInLeft">Assignment 7: Distillation - Get Smaller, Get Faster</h2>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Toxic Comment Classifier</h3>
+                    <p class="text-white">Enter a comment to classify its toxicity level.</p>
+                </div>
+                <div class="card-body">
+                    <!-- Input Section -->
+                    <div class="input-section mb-4">
+                        <textarea class="form-control mb-3" id="text-input" rows="4" placeholder="Enter a comment here..."></textarea>
+                        <button class="btn btn-primary" id="classify-btn">Classify</button>
+                    </div>
+                    
+                    <!-- Results Section -->
+                    <div class="results-section" id="results-section" style="display: none;">
+                        <h4>Classification Results</h4>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="result-summary mb-3">
+                                    <h5 id="classification-result">Non-Toxic</h5>
+                                    <p>Confidence: <span id="confidence-value">0%</span></p>
+                                </div>
+                                
+                                <!-- Visualization will be inserted here -->
+                                <div class="visualization-container">
+                                    <canvas id="result-chart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Loading Indicator -->
+                    <div id="loading-indicator" style="display: none;">
+                        <div class="d-flex justify-content-center">
+                            <div class="spinner-border text-primary" role="status">
+                                <span class="visually-hidden">Loading...</span>
+                            </div>
+                        </div>
+                        <p class="text-center mt-2">Classifying comment...</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Model Information -->
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">About the Model</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Model Details</h4>
+                            <ul>
+                                <li><strong>Model Type:</strong> DistilBERT</li>
+                                <li><strong>Base Model:</strong> <span id="model-name">DistilBERT</span></li>
+                                <li><strong>Purpose:</strong> Classification of toxic vs. non-toxic text</li>
+                                <li><strong>Advantages:</strong> Faster and smaller than full-size models while maintaining accuracy</li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>Distillation Benefits</h4>
+                            <p>Model distillation is a technique that creates smaller, faster models while maintaining performance by:</p>
+                            <ul>
+                                <li>Transferring knowledge from a larger "teacher" model to a smaller "student" model</li>
+                                <li>Reducing parameters and computational requirements</li>
+                                <li>Enabling deployment on resource-constrained devices</li>
+                                <li>Faster inference time for real-time applications</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Batch Classification (optional feature) -->
+            <div class="card mt-4">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0">Batch Classification</h3>
+                </div>
+                <div class="card-body">
+                    <p>Classify multiple comments at once by entering them below (one per line):</p>
+                    <textarea class="form-control mb-3" id="batch-input" rows="4" placeholder="Enter multiple comments, one per line..."></textarea>
+                    <button class="btn btn-primary" id="batch-classify-btn">Classify All</button>
+                    
+                    <div class="batch-results mt-4" id="batch-results" style="display: none;">
+                        <h4>Batch Results</h4>
+                        <div class="table-responsive">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Text</th>
+                                        <th>Classification</th>
+                                        <th>Confidence</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="batch-results-body">
+                                    <!-- Results will be inserted here -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="batch-visualization mt-3">
+                            <canvas id="batch-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="{{ url_for('static', filename='css/a7_style.css') }}">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='js/a7_script.js') }}"></script>
+{% endblock %}

@@ -9,6 +9,7 @@ from app.assignments.a4_do_you_agree.inference import NLIPredictor
 from app.assignments.a5_optimization_human_preference.inference import get_predictor
 from app.assignments.a6_talk_with_yourselves.simple_rag import initialize_rag_system
 from app.assignments.a6_talk_with_yourselves.model_analysis import analyze_retriever_model, analyze_generator_model
+from app.assignments.a7_distillation_get_smaller_get_faster.toxic_classifier import ToxicClassifier
 import json
 from transformers import AutoTokenizer, AutoModelForSequenceClassification
 
@@ -18,7 +19,8 @@ models = {
     'a2': None,
     'a4': None,
     'a5': None,
-    'a6': None
+    'a6': None,
+    'a7': None
 }
 
 # Store conversation history for A6
@@ -196,6 +198,17 @@ def load_models():
         logger.error(f"Error loading A6 RAG model: {str(e)}")
         logger.error(f"Traceback: {traceback.format_exc()}")
     
+    # Load A7 Toxic Classifier model
+    try:
+        logger.info("Loading A7 Toxic Classifier model")
+        # Use the default model from the toxic_classifier.py script
+        model_name = "distilbert-base-uncased-finetuned-sst-2-english"
+        models['a7'] = ToxicClassifier(model_name)
+        logger.info(f"Successfully loaded A7 Toxic Classifier model using {model_name}")
+    except Exception as e:
+        logger.error(f"Error loading A7 Toxic Classifier model: {str(e)}")
+        logger.error(f"Traceback: {traceback.format_exc()}")
+
 def register_routes(app):
     @app.route('/')
     @app.route('/home')
@@ -468,9 +481,121 @@ def register_routes(app):
     
     @app.route('/a7')
     def a7():
-        """Route for Assignment 7: Coming Soon."""
+        """Route for Assignment 7: Distillation - Get Smaller, Get Faster."""
+        # Initialize the toxic classifier if not already loaded
+        if models.get('a7') is None:
+            try:
+                model_name = "distilbert-base-uncased-finetuned-sst-2-english"
+                models['a7'] = ToxicClassifier(model_name)
+                logger.info(f"Initialized A7 Toxic Classifier on demand with {model_name}")
+            except Exception as e:
+                logger.error(f"Error initializing A7 Toxic Classifier: {str(e)}")
+                logger.error(f"Traceback: {traceback.format_exc()}")
+                return render_template('coming_soon.html')
+                
         return render_template('a7.html')
     
+    @app.route('/api/a7/classify', methods=['POST'])
+    def classify_text():
+        """API endpoint for A7 text classification."""
+        try:
+            data = request.get_json()
+            text = data.get('text', '')
+            
+            if not text:
+                return jsonify({'error': 'No text provided'}), 400
+            
+            # Initialize the model if it hasn't been already
+            if models.get('a7') is None:
+                model_name = "distilbert-base-uncased-finetuned-sst-2-english"
+                models['a7'] = ToxicClassifier(model_name)
+            
+            # Classify the text
+            result = models['a7'].classify(text)
+            
+            # Convert numpy arrays and types to Python native types for JSON serialization
+            result['probabilities'] = result['probabilities'].tolist()
+            result['confidence'] = float(result['confidence'])  # Convert numpy.float32 to Python float
+            
+            # Map model labels to toxicity labels (negative -> Toxic, positive -> Non-Toxic)
+            toxicity_mapping = {
+                'NEGATIVE': 'Toxic',
+                'POSITIVE': 'Non-Toxic',
+                0: 'Non-Toxic',  # In case labels are represented as indices
+                1: 'Toxic'
+            }
+            
+            # Override label with mapped toxicity label
+            result['original_label'] = result['label']  # Store original label
+            result['label'] = toxicity_mapping.get(result['label'], result['label'])
+            
+            # Map id2label to toxicity labels
+            original_id2label = result['id2label']
+            result['id2label'] = {}
+            for id_key, label in original_id2label.items():
+                result['id2label'][id_key] = toxicity_mapping.get(label, label)
+            
+            # Add model name to result
+            result['model_name'] = models['a7'].model.config.name_or_path
+            
+            return jsonify(result)
+            
+        except Exception as e:
+            logger.error(f"Error in classify_text: {str(e)}")
+            logger.error(f"Traceback: {traceback.format_exc()}")
+            return jsonify({'error': str(e)}), 500
+    
+    @app.route('/api/a7/batch_classify', methods=['POST'])
+    def batch_classify_texts():
+        """API endpoint for A7 batch text classification."""
+        try:
+            data = request.get_json()
+            texts = data.get('texts', [])
+            
+            if not texts:
+                return jsonify({'error': 'No texts provided'}), 400
+            
+            if len(texts) > 10:
+                return jsonify({'error': 'Too many texts. Maximum is 10.'}), 400
+            
+            # Initialize the model if it hasn't been already
+            if models.get('a7') is None:
+                model_name = "distilbert-base-uncased-finetuned-sst-2-english"
+                models['a7'] = ToxicClassifier(model_name)
+            
+            # Classify all texts
+            results = models['a7'].batch_classify(texts)
+            
+            # Mapping for toxicity labels
+            toxicity_mapping = {
+                'NEGATIVE': 'Toxic',
+                'POSITIVE': 'Non-Toxic',
+                0: 'Non-Toxic',  # In case labels are represented as indices
+                1: 'Toxic'
+            }
+            
+            # Convert numpy arrays and types to Python native types for JSON serialization
+            for result in results:
+                result['probabilities'] = result['probabilities'].tolist()
+                result['confidence'] = float(result['confidence'])
+                
+                # Map labels to toxicity labels
+                result['original_label'] = result['label']
+                result['label'] = toxicity_mapping.get(result['label'], result['label'])
+                
+                # Map id2label to toxicity labels
+                original_id2label = result['id2label']
+                result['id2label'] = {}
+                for id_key, label in original_id2label.items():
+                    result['id2label'][id_key] = toxicity_mapping.get(label, label)
+            
+            return jsonify({'results': results})
+            
+        except Exception as e:
+            logger.error(f"Error in batch_classify_texts: {str(e)}")
+            logger.error(f"Traceback: {traceback.format_exc()}")
+            return jsonify({'error': str(e)}), 500
+
     @app.route('/chat', methods=['POST'])
     def chat():
         """Process chat messages and return responses for A6."""

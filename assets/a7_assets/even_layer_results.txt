@@ -1,0 +1,8 @@
+Test Results:
+  Test loss: 0.3825
+  Test accuracy: 0.9182
+
+Model Information:
+  Teacher parameters: 109,483,778
+  Student parameters: 66,956,546
+  Parameter reduction: 38.84%

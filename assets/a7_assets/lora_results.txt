@@ -1,0 +1,10 @@
+Model: LoRA fine-tuned bert-base-uncased
+LoRA rank (r): 8
+LoRA alpha: 32
+LoRA dropout: 0.1
+Learning rate: 0.001
+Number of epochs: 5
+Base parameters: 109,927,684
+Trainable parameters: 443,906 (0.40%)
+Test loss: 0.20813964307308197
+Test accuracy: 0.9205999970436096

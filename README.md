@@ -331,6 +331,22 @@ Both scripts implement Retrieval-Augmented Generation (RAG) systems for answerin
 ```
 ------------------
 
+### A7: Distillation Get Smaller, Get Faster
+In this assignment, I will will explore the comparison between Odd Layer and Even Layer Student Training Models and LoRA (Low-Rank Adaptation) on a distillation task using BERT from Huggingface
+
+|App Demo Single Inference|App Demo Batch Inference|
+|-------------------------|------------------------|
+|<img src="https://github.com/aryashah2k/NLP-NLU/blob/main/assets/A7_DemoP1.gif">||<img src="https://github.com/aryashah2k/NLP-NLU/blob/main/assets/A7_DemoP2.gif">|
+
+|Screenshot Part 1|Screenshot Part 2|
+|-----------------|-----------------|
+|![a7_1](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a7_assets/a7_part1.PNG)|![a7_1](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a7_assets/a7_part2.PNG)|
+
+### Results and Analysis
+
+
+--------------------
+
 ## Setup and Installation
 
 1. Clone the repository

@@ -1,0 +1,68 @@
+/* A7 Toxic Classifier Styles */
+
+.input-section {
+    background-color: #f8f9fa;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.results-section {
+    margin-top: 30px;
+    transition: all 0.3s ease;
+}
+
+.result-summary {
+    text-align: center;
+    padding: 15px;
+    border-radius: 5px;
+    background-color: #f8f9fa;
+    margin-bottom: 20px;
+}
+
+.result-summary h5 {
+    font-weight: bold;
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+}
+
+.visualization-container {
+    height: 300px;
+    margin: 20px 0;
+}
+
+.batch-results {
+    margin-top: 30px;
+}
+
+.batch-visualization {
+    height: 300px;
+    margin-top: 20px;
+}
+
+/* Color classes for toxic/non-toxic */
+.toxic {
+    color: #dc3545;
+}
+
+.non-toxic {
+    color: #28a745;
+}
+
+.confidence-high {
+    font-weight: bold;
+}
+
+/* Loading spinner */
+#loading-indicator {
+    text-align: center;
+    margin: 30px 0;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .visualization-container,
+    .batch-visualization {
+        height: 200px;
+    }
+}
