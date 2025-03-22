@@ -10,7 +10,7 @@ This repository contains my assignments for the AT82.05 Artificial Intelligence:
 |<a href="https://github.com/aryashah2k/NLP-NLU/tree/main?tab=readme-ov-file#a4-do-you-agree">A4: Do You AGREE!</a>|
 |<a href="https://github.com/aryashah2k/NLP-NLU/tree/main?tab=readme-ov-file#a5-optimization-human-preference">A5: Optimization Human Preference</a>|
 |<a href="https://github.com/aryashah2k/NLP-NLU/tree/main?tab=readme-ov-file#a6-lets-talk-yourselves">A6: Lets Talk Yourselves!</a>|
-|<a href="https://github.com/aryashah2k/NLP-NLU/blob/main/app/static/coming_soon.gif">A7....Coming Soon!</a>|
+|<a href="https://github.com/aryashah2k/NLP-NLU/tree/main?tab=readme-ov-file#a7-distillation-get-smaller-get-faster">A7: Distillation Get Smaller, Get Faster</a>|
 |<a href="https://github.com/aryashah2k/NLP-NLU/tree/main?tab=readme-ov-file#setup-and-installation">Setup & Installation</a>|
 
 ## Project Structure
@@ -336,7 +336,7 @@ In this assignment, I will will explore the comparison between Odd Layer and Eve
 
 |App Demo Single Inference|App Demo Batch Inference|
 |-------------------------|------------------------|
-|<img src="https://github.com/aryashah2k/NLP-NLU/blob/main/assets/A7_DemoP1.gif">||<img src="https://github.com/aryashah2k/NLP-NLU/blob/main/assets/A7_DemoP2.gif">|
+|<img src="https://github.com/aryashah2k/NLP-NLU/blob/main/assets/A7_DemoP1.gif">|<img src="https://github.com/aryashah2k/NLP-NLU/blob/main/assets/A7_DemoP2.gif">|
 
 |Screenshot Part 1|Screenshot Part 2|
 |-----------------|-----------------|
@@ -344,6 +344,41 @@ In this assignment, I will will explore the comparison between Odd Layer and Eve
 
 ### Results and Analysis
 
+#### Performance Comparison
+
+| Model Type | Test Loss | Accuracy | Precision | Recall | F1 Score |Results Overview|
+|------------|-----------|----------|-----------|--------|----------|----------------|
+| Odd Layer Distillation | 0.386519015 | 0.9182 | 0.909302326 | 0.930583102 | 0.919819643 |<a href="https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a7_assets/odd_layer_results.txt">Click Here</a>|
+| Even Layer Distillation | 0.376649498 | 0.9208 | 0.920792079 | 0.922253074 | 0.921521998 |<a href="https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a7_assets/even_layer_results.txt">Click Here</a>|
+| LoRA | 0.208793605 | 0.9206 | 0.916470588 | 0.92701309 | 0.921711694 |<a href="https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a7_assets/lora_results.txt">Click Here</a>|
+
+|Odd_Layer Training Curves|Even_Layer Training Curves|Lora Training Curves|
+|-------------------------|--------------------------|--------------------|
+|![odd](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a7_assets/odd_layer_training_curves.png)|![even](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a7_assets/even_layer_training_curves.png)|![lora](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a7_assets/lora_training_curves.png)|
+
+|Confusion Matrices|Metrics Comparison|
+|------------------|------------------|
+|![cm](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a7_assets/confusion_matrices.png)|![compare](https://github.com/aryashah2k/NLP-NLU/blob/main/assets/a7_assets/metrics_comparison.png)|
+
+#### Best Performing Models
+
+- **Best Accuracy**: Even Layer Distillation (0.9208)
+- **Best Precision**: Even Layer Distillation (0.9208)
+- **Best Recall**: Odd Layer Distillation (0.9306)
+- **Best F1 Score**: LoRA (0.9217)
+- **Lowest Loss**: LoRA (0.2088)
+
+#### Analysis of Differences
+
+#### Odd vs Even Layer Distillation
+
+Even layer distillation outperforms odd layer distillation in terms of accuracy by 0.0026. However, even layer distillation has a higher F1 score by 0.0017.
+
+This suggests that the even-numbered layers in BERT contain more task-relevant information for toxic comment classification. These layers might capture more semantic understanding needed for this task.
+
+#### Distillation vs LoRA
+
+The best distillation approach (Even Layer Distillation) outperforms LoRA in terms of accuracy by 0.0002. Similarly, LoRA has a higher F1 score by 0.0002.
 
 --------------------
 
